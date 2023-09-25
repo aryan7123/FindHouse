@@ -1,0 +1,85 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Nunito Sans", sans-serif;
+  position: relative;
+  width: 100%;
+  height: 100vh;
+}
+
+.home-section {
+  width: 100%;
+  position: relative;
+  background-image: url(../public/images/1.92b21fdd.jpg);
+  background-position: 50%;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.home-section::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.6;
+  background-color: #1d293e;
+}
+
+.buy-button::before {
+  content: "";
+  position: absolute;
+  background: #ff5a5f;
+  transform: rotate(45deg);
+  width: 20px;
+  height: 20px;
+  bottom: -9px;
+  left: 38px;
+}
+
+.search-box::before {
+  background-color: hsla(0, 0%, 100%, 0.15);
+  border-radius: 8px;
+  bottom: -10px;
+  content: "";
+  left: -10px;
+  position: absolute;
+  right: -10px;
+  top: -10px;
+  z-index: -1;
+}
+
+.inner-page-section {
+  width: 100%;
+  position: relative;
+  background-image: url(../public/images/inner-pagebg.17d731a1.jpg);
+  background-position: 50%;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.inner-page-section::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.6;
+  background-color: #1d293e;
+}
