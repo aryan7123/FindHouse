@@ -565,7 +565,7 @@ l-31 -31 -138 -3 c-130 -3 -139 -2 -172 20 -25 17 -39 37 -49 68 -22 73 -35
       <section className="w-full bg-[#ff5a5f]">
         <div className="max-w-6xl flex flex-col md:gap-0 gap-5 md:flex-row items-center justify-between mx-auto p-8 md:px-0">
           <div className="flex flex-col gap-2">
-            <h3 className="text-white text-2xl md:text-3xl font-semibold">
+            <h3 className="text-white md:text-start text-center text-2xl md:text-3xl font-semibold">
               Become a Real Estate Agent
             </h3>
             <span className="text-white text-xs md:text-start text-center md:text-sm font-medium">
