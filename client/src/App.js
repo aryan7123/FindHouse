@@ -7,6 +7,7 @@ import ForgotPassword from "./pages/ForgotPassword";
 import UserDashboard from "./pages/UserDashboard";
 import CreatePassword from "./pages/CreatePassword";
 import Verification from "./pages/Verification";
+import CreateListing from "./pages/CreateListing";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path="/dashboard" element={<UserDashboard />}/>
           <Route path="/create-password" element={<CreatePassword />}/>
           <Route path="/otp-verification" element={<Verification />}/>
+          <Route path="/create-listing" element={<CreateListing />}/>
         </Routes>
       </Router>
     </>

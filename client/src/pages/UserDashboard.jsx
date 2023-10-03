@@ -106,7 +106,7 @@ const UserDashboard = () => {
               <div className="bg-[#ffe8e9] rounded-full w-10 h-10 flex items-center justify-center">
                 <PiHouseLine className="text-[#ff5a5f]" size={20}/>
               </div>
-              <span className="text-sm font-medium text-[#484848]">Your listing Luxury Family Home has been approved!.</span>
+              <span className="text-sm font-medium text-[#484848]">Your listing Luxury Family Home has been approved!</span>
             </div>
             <div className="flex items-center gap-3 mb-6">
               <div className="bg-[#ffe8e9] rounded-full w-10 h-10 flex items-center justify-center">
@@ -122,7 +122,7 @@ const UserDashboard = () => {
             </div>
           </div>
         </div>
-        <div className="w-full text-center mt-10">
+        <div className="w-full text-center mt-12">
           <h3 className="text-sm font-semibold text-[#8a99b3]">© 2020 Find House. Made with love.</h3>
         </div>
       </main>
