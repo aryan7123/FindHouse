@@ -14,10 +14,11 @@ import DashboardSidebar from "../components/DashboardSidebar";
 import { useGlobalContext } from "../context/context";
 
 const UserDashboard = () => {
-  const { scrollHeader, scrollButton, getUserDetails, userData, token } =
+  const { scrollButton, getUserDetails, userData, token, handleDashboardSidebar, setDashboardSidebar } =
     useGlobalContext();
 
   useEffect(() => {
+    setDashboardSidebar(false)
     if (token) {
       getUserDetails();
     } else {
@@ -35,7 +36,7 @@ const UserDashboard = () => {
       <DashboardSidebar />
 
       <main className="bg-[#f7f7f7] w-full md:pl-[340px] md:pr-[30px] md:py-[100px] py-12 px-6 md:mt-[100px] mt-0">
-        <button className="bg-white w-full shadow-md rounded-md flex md:hidden items-center gap-2 px-4 py-6">
+        <button onClick={handleDashboardSidebar} className="bg-white w-full shadow-md rounded-md flex md:hidden items-center gap-2 px-4 py-6">
           <AiOutlineMenu size={20} className="text-[#484848]" />
           <span className="text-sm font-medium text-[#484848]">
             Dashboard Menu
@@ -123,7 +124,7 @@ const UserDashboard = () => {
           </div>
         </div>
         <div className="w-full text-center mt-12">
-          <h3 className="text-sm font-semibold text-[#8a99b3]">© 2020 Find House. Made with love.</h3>
+          <h3 className="text-sm font-medium text-[#8a99b3]">© 2020 Find House. Made with love.</h3>
         </div>
       </main>
     </>

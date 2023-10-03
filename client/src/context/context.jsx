@@ -10,6 +10,11 @@ const AppProvider = ({ children }) => {
   const [openModal, setOpenModal] = useState(false);
   const [scrollButton, setScrollButton] = useState(false);
   const [userData, setUserData] = useState([]);
+  const [dashboardSidebar, setDashboardSidebar] = useState(false);
+
+  const handleDashboardSidebar = () => {
+    setDashboardSidebar(true);
+  }
 
   const onScrollTop = () => {
     window.scrollTo({
@@ -72,6 +77,9 @@ const AppProvider = ({ children }) => {
         scrollButton,
         userData,
         token,
+        dashboardSidebar,
+        setDashboardSidebar,
+        handleDashboardSidebar,
         setOpenSidebar,
         onScrollTop,
         handleSidebar,
