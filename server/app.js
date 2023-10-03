@@ -6,6 +6,7 @@ import dotenv from "dotenv";
 
 import Connection from "./database/conn.js";
 import userRouter from "./routes/users.js";
+import propertyRouter from "./routes/properties.js";
 
 const app = express();
 dotenv.config();
@@ -15,6 +16,7 @@ app.use(bodyParser.json({ extended: true, limit: "20mb" }));
 app.use(cors());
 
 app.use("/user", userRouter);
+app.use("/properties", propertyRouter);
 
 const PORT = process.env.PORT || 8080;
 

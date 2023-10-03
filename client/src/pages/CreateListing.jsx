@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { AiOutlineMenu } from "react-icons/ai";
 import { BsCloudUpload } from "react-icons/bs";
@@ -10,9 +10,34 @@ import DashboardHeader from "../components/DashboardHeader";
 import DashboardSidebar from "../components/DashboardSidebar";
 
 import { useGlobalContext } from "../context/context";
+import axios from 'axios';
 
 const CreateListing = () => {
   const { scrollButton, getUserDetails, userData, token, handleDashboardSidebar, setDashboardSidebar } = useGlobalContext();
+  const [selectedCheckboxes, setSelectedCheckboxes] = useState([]);
+  const [images, setImages] = useState([]);
+  const initialState = {
+    property_title: "",
+    description: "",
+    status: "",
+    property_type: "",
+    price: "",
+    area: "",
+    rooms: "",
+    address: "",
+    state: "",
+    city: "",
+    zip: "",
+    country: "",
+    property_id: "",
+    bedrooms: "",
+    bathrooms: "",
+    garage: "",
+    garage_size: "",
+    year_built: "",
+    amenities: "",
+    images: ""
+  }
 
   useEffect(() => {
     setDashboardSidebar(false)
@@ -31,6 +56,28 @@ const CreateListing = () => {
     onDrop,
     accept: 'image/*',
   });
+
+  const handleFileChange = (e) => {
+    const selectedImages = e.target.files;
+    setImages(selectedImages);
+  };
+
+  const handleCheckboxChange = (e) => {
+    const currentValue = e.target.value;
+    if (e.target.checked) {
+      setSelectedCheckboxes([...selectedCheckboxes, currentValue]);
+    } else {
+      setSelectedCheckboxes(selectedCheckboxes.filter((item) => item !== currentValue));
+    }
+  };
+
+  const handleCreateList = async() => {
+    try {
+      const formData = new FormData();
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   return (
     <>
@@ -327,53 +374,53 @@ const CreateListing = () => {
               <label htmlFor="amenities" className="text-base font-semibold text-[#484848]">Amenities</label>
               <div className="flex items-start md:items-center flex-col md:flex-row gap-4 my-4">
                 <div className="flex items-center gap-2">
-                  <input type="checkbox" className="w-4 h-4 border border-[#dee2e6] rounded-2xl cursor-pointer accent-[#ff5a5f]" />
+                  <input type="checkbox" value="Air Conditioner" onChange={handleCheckboxChange} checked={selectedCheckboxes.includes("Air Conditioner")} className="w-4 h-4 border border-[#dee2e6] rounded-2xl cursor-pointer accent-[#ff5a5f]" />
                   <span className="text-sm font-medium text-[#484848]">Air Conditioner</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <input type="checkbox" className="w-4 h-4 border border-[#dee2e6] rounded-2xl cursor-pointer accent-[#ff5a5f]" />
+                  <input type="checkbox" value="Barbeque" onChange={handleCheckboxChange} checked={selectedCheckboxes.includes("Barbeque")} className="w-4 h-4 border border-[#dee2e6] rounded-2xl cursor-pointer accent-[#ff5a5f]" />
                   <span className="text-sm font-medium text-[#484848]">Barbeque</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <input type="checkbox" className="w-4 h-4 border border-[#dee2e6] rounded-2xl cursor-pointer accent-[#ff5a5f]" />
+                  <input type="checkbox" value="Laundry" onChange={handleCheckboxChange} checked={selectedCheckboxes.includes("Laundry")} className="w-4 h-4 border border-[#dee2e6] rounded-2xl cursor-pointer accent-[#ff5a5f]" />
                   <span className="text-sm font-medium text-[#484848]">Laundry</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <input type="checkbox" className="w-4 h-4 border border-[#dee2e6] rounded-2xl cursor-pointer accent-[#ff5a5f]" />
+                  <input type="checkbox" value="Gym" onChange={handleCheckboxChange} checked={selectedCheckboxes.includes("Gym")} className="w-4 h-4 border border-[#dee2e6] rounded-2xl cursor-pointer accent-[#ff5a5f]" />
                   <span className="text-sm font-medium text-[#484848]">Gym</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <input type="checkbox" className="w-4 h-4 border border-[#dee2e6] rounded-2xl cursor-pointer accent-[#ff5a5f]" />
+                  <input type="checkbox" value="TV Cable" onChange={handleCheckboxChange} checked={selectedCheckboxes.includes("TV Cable")} className="w-4 h-4 border border-[#dee2e6] rounded-2xl cursor-pointer accent-[#ff5a5f]" />
                   <span className="text-sm font-medium text-[#484848]">TV Cable</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <input type="checkbox" className="w-4 h-4 border border-[#dee2e6] rounded-2xl cursor-pointer accent-[#ff5a5f]" />
+                  <input type="checkbox" value="Rooftop" onChange={handleCheckboxChange} checked={selectedCheckboxes.includes("Rooftop")} className="w-4 h-4 border border-[#dee2e6] rounded-2xl cursor-pointer accent-[#ff5a5f]" />
                   <span className="text-sm font-medium text-[#484848]">Rooftop</span>
                 </div>
               </div>
               <div className="flex items-start md:items-center flex-col md:flex-row gap-4 md:my-4 my-0">
                 <div className="flex items-center gap-2">
-                  <input type="checkbox" className="w-4 h-4 border border-[#dee2e6] rounded-2xl cursor-pointer accent-[#ff5a5f]" />
+                  <input type="checkbox" value="WiFi" onChange={handleCheckboxChange} checked={selectedCheckboxes.includes("WiFi")} className="w-4 h-4 border border-[#dee2e6] rounded-2xl cursor-pointer accent-[#ff5a5f]" />
                   <span className="text-sm font-medium text-[#484848]">WiFi</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <input type="checkbox" className="w-4 h-4 border border-[#dee2e6] rounded-2xl cursor-pointer accent-[#ff5a5f]" />
+                  <input type="checkbox" value="Microwave" onChange={handleCheckboxChange} checked={selectedCheckboxes.includes("Microwave")} className="w-4 h-4 border border-[#dee2e6] rounded-2xl cursor-pointer accent-[#ff5a5f]" />
                   <span className="text-sm font-medium text-[#484848]">Microwave</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <input type="checkbox" className="w-4 h-4 border border-[#dee2e6] rounded-2xl cursor-pointer accent-[#ff5a5f]" />
+                  <input type="checkbox" value="Outdoor Shower" onChange={handleCheckboxChange} checked={selectedCheckboxes.includes("Outdoor Shower")} className="w-4 h-4 border border-[#dee2e6] rounded-2xl cursor-pointer accent-[#ff5a5f]" />
                   <span className="text-sm font-medium text-[#484848]">Outdoor Shower</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <input type="checkbox" className="w-4 h-4 border border-[#dee2e6] rounded-2xl cursor-pointer accent-[#ff5a5f]" />
+                  <input type="checkbox" value="Swimming Pool" onChange={handleCheckboxChange} checked={selectedCheckboxes.includes("Swimming Pool")} className="w-4 h-4 border border-[#dee2e6] rounded-2xl cursor-pointer accent-[#ff5a5f]" />
                   <span className="text-sm font-medium text-[#484848]">Swimming Pool</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <input type="checkbox" className="w-4 h-4 border border-[#dee2e6] rounded-2xl cursor-pointer accent-[#ff5a5f]" />
+                  <input type="checkbox" value="Lawn" onChange={handleCheckboxChange} checked={selectedCheckboxes.includes("Lawn")} className="w-4 h-4 border border-[#dee2e6] rounded-2xl cursor-pointer accent-[#ff5a5f]" />
                   <span className="text-sm font-medium text-[#484848]">Lawn</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <input type="checkbox" className="w-4 h-4 border border-[#dee2e6] rounded-2xl cursor-pointer accent-[#ff5a5f]" />
+                  <input type="checkbox" value="Refrigerator" onChange={handleCheckboxChange} checked={selectedCheckboxes.includes("Refrigerator")} className="w-4 h-4 border border-[#dee2e6] rounded-2xl cursor-pointer accent-[#ff5a5f]" />
                   <span className="text-sm font-medium text-[#484848]">Refrigerator</span>
                 </div>
               </div>
@@ -385,7 +432,7 @@ const CreateListing = () => {
           <div className="w-full mt-8 bg-[#f7f7f7] cursor-pointer">
             <div className="border border-[#ebebeb] py-10 rounded-lg text-center">
               <div {...getRootProps()}>
-                <input {...getInputProps()} />
+                <input {...getInputProps()} onChange={handleFileChange}/>
                 <BsCloudUpload size={50} className='text-[#ff5a5f] mb-3 text-center mx-auto'/>
                 <p className='text-base font-semibold text-[#484848]'>Drag & Drop an image here, or click to select one</p>
               </div>
@@ -394,7 +441,7 @@ const CreateListing = () => {
         </div>
         <span className='text-lg font-medium text-[#484848]'></span>
         <div className='w-full mt-4'>
-          <button className='bg-[#ff5a5f] rounded-lg text-white text-base font-semibold p-4 w-40 border-2 border-[#ff5a5f] hover:bg-white hover:text-[#ff5a5f] transition'>Create</button>
+          <button onClick={handleCreateList} className='bg-[#ff5a5f] rounded-lg text-white text-base font-semibold p-4 w-40 border-2 border-[#ff5a5f] hover:bg-white hover:text-[#ff5a5f] transition'>Create</button>
         </div>
         <div className="text-center mx-auto text-sm font-medium mt-8 text-[#8a99b3]">© 2020 Find House. Made with love.</div>
       </main>
