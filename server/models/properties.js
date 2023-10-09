@@ -18,7 +18,7 @@ const propertyModel = new mongoose.Schema({
     required: true,
   },
   price: {
-    type: Number,
+    type: String,
     required: true,
   },
   area: {
@@ -62,14 +62,16 @@ const propertyModel = new mongoose.Schema({
     type: String,
     required: true,
   },
-  amenities: {
-    type: Array,
-    required: true
-  },
-  images: {
-    type: Array,
-    required: true
-  }
+  amenities: [
+    {
+      type: String, 
+    },
+  ],
+  images: [
+    {
+      type: String,
+    },
+  ],
 });
 
 const Properties = mongoose.model("properties", propertyModel);

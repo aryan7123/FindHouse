@@ -1,7 +1,6 @@
 import express from "express";
 import cors from "cors";
 import bodyParser from "body-parser";
-import multer from "multer";
 import dotenv from "dotenv";
 
 import Connection from "./database/conn.js";
@@ -14,6 +13,7 @@ dotenv.config();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json({ extended: true, limit: "20mb" }));
 app.use(cors());
+app.use("/images/uploads/", express.static('uploads'));
 
 app.use("/user", userRouter);
 app.use("/properties", propertyRouter);

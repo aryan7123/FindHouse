@@ -11,6 +11,17 @@ const AppProvider = ({ children }) => {
   const [scrollButton, setScrollButton] = useState(false);
   const [userData, setUserData] = useState([]);
   const [dashboardSidebar, setDashboardSidebar] = useState(false);
+  const [featuredProperty, setFeaturedProperty] = useState([]);
+  
+  const getFeaturedProperty = async() => {
+    try {
+      const res = await axios.get("http://localhost:8080/properties/fetch");
+      // console.log(res);
+      setFeaturedProperty(res.data.property);
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   const handleDashboardSidebar = () => {
     setDashboardSidebar(true);
@@ -77,6 +88,7 @@ const AppProvider = ({ children }) => {
         scrollButton,
         userData,
         token,
+        featuredProperty,
         dashboardSidebar,
         setDashboardSidebar,
         handleDashboardSidebar,
@@ -86,6 +98,7 @@ const AppProvider = ({ children }) => {
         handleModal,
         setOpenModal,
         getUserDetails,
+        getFeaturedProperty
       }}
     >
       {children}

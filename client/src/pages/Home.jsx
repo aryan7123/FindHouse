@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { BiUser } from "react-icons/bi";
 import { VscAdd } from "react-icons/vsc";
 import { SlLocationPin } from "react-icons/sl";
 import { CiMenuKebab } from "react-icons/ci";
+import { BiTransfer, BiHeart } from "react-icons/bi";
 
 import Header from "../components/Header";
 import Sidebar from "../components/Sidebar";
@@ -12,8 +13,46 @@ import Footer from "../components/Footer";
 import Modal from "../components/Modal";
 import { useGlobalContext } from "../context/context";
 
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+
 const Home = () => {
-  const { scrollHeader, handleModal, openModal, scrollButton } = useGlobalContext();
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 2,
+        },
+      },
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 1,
+        },
+      },
+    ],
+  };
+
+  const {
+    scrollHeader,
+    handleModal,
+    openModal,
+    scrollButton,
+    getFeaturedProperty,
+    featuredProperty,
+  } = useGlobalContext();
+
+  useEffect(() => {
+    getFeaturedProperty();
+  }, []);
+
   return (
     <>
       <Header />
@@ -82,7 +121,7 @@ const Home = () => {
             <li>
               <button
                 onClick={handleModal}
-                data-modal-target="defaultModal" 
+                data-modal-target="defaultModal"
                 data-modal-toggle="defaultModal"
                 className={
                   scrollHeader
@@ -183,19 +222,64 @@ const Home = () => {
 
       {/* Featured Section */}
       <section className="w-full bg-[#f7f7f7]">
-        <div className="max-w-6xl flex flex-col gap-4 items-center justify-between mx-auto p-8 md:px-0">
+        <div className="max-w-6xl flex flex-col gap-4 items-center justify-between mx-auto px-8 py-16 md:px-0">
           <h3 className="text-[#484848] text-center text-3xl font-semibold">
             Featured Properties
           </h3>
-          <span className="text-[#484848] text-center text-sm font-medium">Handpicked properties by our team</span>
+          <span className="text-[#484848] text-center text-sm font-medium">
+            Handpicked properties by our team
+          </span>
+          <div className="w-full">
+            <Slider {...settings} className="my-0 mx-[-16px]">
+              {featuredProperty.map((item, index) => {
+                const imagePathWithForwardslashes = item.images[0].replace(/\\/g, '/');
+                return (
+                  <div key={index} className="py-0 px-3">
+                    <div className="bg-white shadow-sm border border-[#ebebeb] rounded-lg overflow-hidden relative mb-4">
+                      <div className="thumb rounded-lg mt-[10px] mr-[9px] mb-[10px] ml-[9px] bg-[#1d293e] relative overflow-hidden">
+                        <img
+                          className="max-w-full opacity-60"
+                          src={`http://localhost:8080/images/${imagePathWithForwardslashes}`}
+                          alt={item.property_title}
+                        />
+                        <div className="thumb-content absolute top-[10px] left-[10px] bottom-0 right-[10px]">
+                          <div className="flex items-center gap-3 mt-[10px] ml-[5px]">
+                            <div className="bg-[#3e4c66] rounded text-white px-3 py-2 font-medium text-sm">Featured</div>
+                            <div className="bg-[#ff5a5f] rounded text-white px-3 py-2 font-medium text-sm">{item.status}</div>
+                          </div>
+                          <div className="absolute bottom-[15px] w-full flex items-end justify-between ml-[5px]">
+                            <h3 className="text-white font-semibold text-base">₹{item.price}</h3>
+                            <div className="flex items-center gap-2">
+                              <button className="bg-[#0f151f] rounded-md text-white p-3 opacity-70 transition hover:bg-[#ff5a5f]"><BiTransfer size={16}/></button>
+                              <button className="bg-[#0f151f] rounded-md text-white p-3 opacity-70 transition hover:bg-[#ff5a5f]"><BiHeart size={16}/></button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="p-3">
+                        <h3 className="text-sm font-medium text-[#ff5a5f]">{item.property_type}</h3>
+                      </div>
+                      <div className="pt-0 pb-3 px-3 truncate w-full">
+                        <Link to="/" className="text-[#484848] text-base font-medium transition-colors hover:text-[#ff5a5f]">{item.property_title}</Link>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </Slider>
+          </div>
         </div>
       </section>
 
       {/* find properties section */}
       <section className="w-full bg-white">
         <div className="max-w-6xl flex flex-col gap-4 items-center justify-between mx-auto p-8 md:px-0">
-          <h3 className="text-[#484848] text-center text-3xl font-semibold">Find Properties in These Cities</h3>
-          <span className="text-[#484848] text-center text-sm font-medium">Properties located in your beloved cities</span>
+          <h3 className="text-[#484848] text-center text-3xl font-semibold">
+            Find Properties in These Cities
+          </h3>
+          <span className="text-[#484848] text-center text-sm font-medium">
+            Properties located in your beloved cities
+          </span>
         </div>
       </section>
 
@@ -286,8 +370,14 @@ m3548 -155 c22 -10 52 -31 66 -47 14 -16 149 -242 299 -503 296 -515 298 -520
                   </g>
                 </svg>
               </div>
-              <h3 className="text-center text-[#484848] text-lg font-semibold mt-6 my-3">Trusted By Thousands</h3>
-              <p className="text-sm text-[#484848] text-center leading-6">Our team of experienced real estate professionals is here to provide expert guidance, answer your questions, and make your property journey as smooth as possible.</p>
+              <h3 className="text-center text-[#484848] text-lg font-semibold mt-6 my-3">
+                Trusted By Thousands
+              </h3>
+              <p className="text-sm text-[#484848] text-center leading-6">
+                Our team of experienced real estate professionals is here to
+                provide expert guidance, answer your questions, and make your
+                property journey as smooth as possible.
+              </p>
             </div>
             <div className="w-full md:w-1/3 bg-white shadow rounded-lg px-6 py-10 flex flex-col items-center justify-center hover:shadow-lg">
               <div className="rounded-full text-center bg-[#ffe8e9] p-6 w-32 h-32">
@@ -374,8 +464,14 @@ l135 0 0 80 0 80 -80 0 -80 0 0 560 0 560 280 0 280 0 0 -400 0 -400 80 0 80
                   </g>
                 </svg>
               </div>
-              <h3 className="text-center text-[#484848] text-lg font-semibold mt-6 my-3">Wide Range Of Properties</h3>
-              <p className="text-sm text-[#484848] text-center leading-6">Whether you're in the market for a cozy apartment, a spacious family house, a commercial space, or a serene piece of land, our app has it all. We cater to every property type and budget.</p>
+              <h3 className="text-center text-[#484848] text-lg font-semibold mt-6 my-3">
+                Wide Range Of Properties
+              </h3>
+              <p className="text-sm text-[#484848] text-center leading-6">
+                Whether you're in the market for a cozy apartment, a spacious
+                family house, a commercial space, or a serene piece of land, our
+                app has it all. We cater to every property type and budget.
+              </p>
             </div>
             <div className="w-full md:w-1/3 bg-white shadow rounded-lg px-6 py-10 flex flex-col items-center justify-center hover:shadow-lg">
               <div className="rounded-full text-center bg-[#ffe8e9] p-6 w-32 h-32">
@@ -461,8 +557,16 @@ l-31 -31 -138 -3 c-130 -3 -139 -2 -172 20 -25 17 -39 37 -49 68 -22 73 -35
                   </g>
                 </svg>
               </div>
-              <h3 className="text-center text-[#484848] text-lg font-semibold mt-6 my-3">Financing Made Easy</h3>
-              <p className="text-sm text-[#484848] text-center leading-6"> We partner with trusted financial institutions to offer mortgage solutions tailored to your needs. Our app provides tools to calculate mortgage rates, helping you understand your borrowing capacity.</p>
+              <h3 className="text-center text-[#484848] text-lg font-semibold mt-6 my-3">
+                Financing Made Easy
+              </h3>
+              <p className="text-sm text-[#484848] text-center leading-6">
+                {" "}
+                We partner with trusted financial institutions to offer mortgage
+                solutions tailored to your needs. Our app provides tools to
+                calculate mortgage rates, helping you understand your borrowing
+                capacity.
+              </p>
             </div>
           </div>
         </div>
