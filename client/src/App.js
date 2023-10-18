@@ -8,6 +8,7 @@ import UserDashboard from "./pages/UserDashboard";
 import CreatePassword from "./pages/CreatePassword";
 import Verification from "./pages/Verification";
 import CreateListing from "./pages/CreateListing";
+import SingleListing from "./pages/SingleListing";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path="/create-password" element={<CreatePassword />}/>
           <Route path="/otp-verification" element={<Verification />}/>
           <Route path="/create-listing" element={<CreateListing />}/>
+          <Route path="/listing/:id" element={<SingleListing />}/>
         </Routes>
       </Router>
     </>

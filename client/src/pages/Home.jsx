@@ -5,6 +5,7 @@ import { VscAdd } from "react-icons/vsc";
 import { SlLocationPin } from "react-icons/sl";
 import { CiMenuKebab } from "react-icons/ci";
 import { BiTransfer, BiHeart } from "react-icons/bi";
+import { TfiLocationPin } from "react-icons/tfi";
 
 import Header from "../components/Header";
 import Sidebar from "../components/Sidebar";
@@ -260,7 +261,19 @@ const Home = () => {
                         <h3 className="text-sm font-medium text-[#ff5a5f]">{item.property_type}</h3>
                       </div>
                       <div className="pt-0 pb-3 px-3 truncate w-full">
-                        <Link to="/" className="text-[#484848] text-base font-medium transition-colors hover:text-[#ff5a5f]">{item.property_title}</Link>
+                        <Link to={`/listing/${item._id}`} className="text-[#484848] text-base font-medium transition-colors hover:text-[#ff5a5f]">{item.property_title}</Link>
+                      </div>
+                      <div className="flex items-center gap-1 px-3 pb-2">
+                        <TfiLocationPin size={15}/> 
+                        <span className="text-sm font-medium text-[#484848]">{item.location[0].address}</span>
+                      </div>
+                      <div className="flex items-center gap-4 p-3">
+                        <span className="whitespace-nowrap text-sm font-medium text-[#484848]">Beds: {item.bedrooms}</span>
+                        <span className="whitespace-nowrap text-sm font-medium text-[#484848]">Baths: {item.bathrooms}</span>
+                        <span className="whitespace-nowrap text-sm font-medium text-[#484848]">Size: {item.area}</span>
+                      </div>
+                      <div className="border-t py-3 border-[#eee]">
+                        <span className="text-sm px-3 font-medium text-[#777]">{item.year_built}</span>
                       </div>
                     </div>
                   </div>

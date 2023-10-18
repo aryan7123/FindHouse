@@ -89,5 +89,19 @@ propertyRouter.get("/fetch", async (req, res) => {
   }
 });
 
+propertyRouter.post("/single_listing", async (req, res) => {
+  try {
+    const propertyId = req.body.id;
+    const singleProperty = await Properties.findById(propertyId);
+    if(singleProperty) {
+      res.status(200).json({ property: singleProperty });
+    }
+    else {
+      res.status(200).json({ property: "Not Found" });
+    }
+  } catch (error) {
+    console.error(error);
+  }
+});
 
 export default propertyRouter;
