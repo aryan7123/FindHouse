@@ -192,7 +192,7 @@ const SingleListing = () => {
                   Area: {propertyDetails.area}
                 </div>
               </div>
-              <h3 className="text-lg font-semibold text-[#484848] px-6 mb-3">
+              <h3 className="text-lg font-semibold text-[#484848] px-6 mb-2">
                 Description
               </h3>
               <p className="text-sm text-[#484848] transition-all px-6 pt-4 pb-8">
@@ -208,24 +208,53 @@ const SingleListing = () => {
                 </button>
               </p>
               <hr className="border-b border-[#ebebeb]"/>
-              <h3 className="text-lg font-semibold text-[#484848] px-6 py-6">
+              <h3 className="text-lg font-semibold text-[#484848] px-6 pt-6">
                 Property Details
               </h3>
               <div className="w-full border-b border-[#ebebeb]">
-                <div className="flex px-6 pb-2 md:pb-3 flex-col md:flex-row md:items-center items-start md:gap-0 gap-2 justify-between">
-                  <span>Property ID: {propertyDetails.property_id}</span>
-                  <span>Bedrooms: {propertyDetails.bedrooms}</span>
-                  <span>Property Type: {propertyDetails.property_type}</span>
-                </div>
-                <div className="flex px-6 pb-3 flex-col md:flex-row md:items-center items-start md:gap-0 gap-2 justify-between">
-                  <span>Price: INR {propertyDetails.price}</span>
-                  <span>Bathrooms: {propertyDetails.bathrooms}</span>
-                  <span>Property Status: {propertyDetails.status}</span>
-                </div>
-                <div className="flex px-6 pb-3 flex-col md:flex-row md:items-center items-start md:gap-0 gap-2 justify-between">
-                  <span>Property Size: {propertyDetails.area}</span>
-                  <span>Garage: {propertyDetails.garage}</span>
-                  <span>Garage Size: {propertyDetails.garage_size}</span>
+                <div className="flex flex-col md:flex-row items-start md:items-center md:gap-0 gap-2 justify-between px-6 py-6">
+                  <div className="flex flex-col gap-2 items-start">
+                    <div className="flex items-center gap-1">
+                      <span className="text-base font-medium text-[#777]">Property ID: </span>
+                      <span className="text-base font-medium text-[#484848]">{propertyDetails.property_id}</span>
+                    </div>
+                    <div className="flex items-center gap-1">
+                      <span className="text-base font-medium text-[#777]">Property Type: </span>
+                      <span className="text-base font-medium text-[#484848]">{propertyDetails.property_type}</span>
+                    </div>
+                    <div className="flex items-center gap-1">
+                      <span className="text-base font-medium text-[#777]">Property Status: </span>
+                      <span className="text-base font-medium text-[#484848]">{propertyDetails.status}</span>
+                    </div>
+                  </div>
+                  <div className="flex flex-col gap-2 items-start">
+                    <div className="flex items-center gap-1">
+                      <span className="text-base font-medium text-[#777]">Area: </span>
+                      <span className="text-base font-medium text-[#484848]">{propertyDetails.area}</span>
+                    </div>
+                    <div className="flex items-center gap-1">
+                      <span className="text-base font-medium text-[#777]">Bedrooms: </span>
+                      <span className="text-base font-medium text-[#484848]">{propertyDetails.bedrooms}</span>
+                    </div>
+                    <div className="flex items-center gap-1">
+                      <span className="text-base font-medium text-[#777]">Bathrooms: </span>
+                      <span className="text-base font-medium text-[#484848]">{propertyDetails.bathrooms}</span>
+                    </div>
+                  </div>
+                  <div className="flex flex-col gap-2 items-start">
+                    <div className="flex items-center gap-1">
+                      <span className="text-base font-medium text-[#777]">Garage: </span>
+                      <span className="text-base font-medium text-[#484848]">{propertyDetails.garage}</span>
+                    </div>
+                    <div className="flex items-center gap-1">
+                      <span className="text-base font-medium text-[#777]">Garage Size: </span>
+                      <span className="text-base font-medium text-[#484848]">{propertyDetails.garage_size}</span>
+                    </div>
+                    <div className="flex items-center gap-1">
+                      <span className="text-base font-medium text-[#777]">Year Built: </span>
+                      <span className="text-base font-medium text-[#484848]">{propertyDetails.year_built}</span>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
