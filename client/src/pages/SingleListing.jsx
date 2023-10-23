@@ -16,6 +16,7 @@ import {
   BiShareAlt,
   BiPrinter,
   BiChevronRight,
+  BiCheck
 } from "react-icons/bi";
 import axios from "axios";
 
@@ -57,6 +58,12 @@ const SingleListing = () => {
       ? propertyDetails.description
       : propertyDetails.description.slice(0, 350)
     );
+
+    let splitArray = [];
+    if(propertyDetails.amenities && propertyDetails.amenities.length > 0) {
+      splitArray = propertyDetails.amenities[0].split(",");
+    }
+    console.log(splitArray);
 
   return (
     <>
@@ -176,7 +183,7 @@ const SingleListing = () => {
 
       <section className="w-full bg-[#f7f7f7]">
         <div className="max-w-6xl mx-auto px-8 py-10 md:py-16 md:px-0">
-          <div className="w-full flex flex-col md:flex-row gap-4">
+          <div className="w-full flex flex-col gap-4">
             <div className="bg-white rounded-md shadow-sm border border-[#ebebeb]">
               <div className="flex flex-col md:flex-row items-start md:items-center gap-3 p-6">
                 <div className="bg-[#f7f7f7] w-full md:w-32 text-center rounded-md text-[#484848] py-[10px] text-sm font-medium cursor-pointer hover:text-[#ff5a5f]">
@@ -255,6 +262,19 @@ const SingleListing = () => {
                       <span className="text-base font-medium text-[#484848]">{propertyDetails.year_built}</span>
                     </div>
                   </div>
+                </div>
+              </div>
+            </div>
+            <div className="bg-white mt-4 rounded-md shadow-sm p-6 border w-full border-[#ebebeb]">
+              <h3 className="text-lg font-semibold text-[#484848]">Amenities</h3>
+              <div className="pt-3">
+                <div className="flex flex-col md:flex-row justify-between md:gap-0 gap-1 items-start md:items-center">
+                  {splitArray.map((item, index) => (
+                    <div key={index} className="flex items-center gap-1">
+                      <BiCheck size={20} className="text-[#ff5a5f]"/>
+                      <span>{item}</span>
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
