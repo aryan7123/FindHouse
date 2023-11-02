@@ -1,30 +1,34 @@
+import React,{ lazy, Suspense } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-import Home from "./pages/Home";
-import Register from "./pages/Register";
-import Login from "./pages/Login";
-import ForgotPassword from "./pages/ForgotPassword";
-import UserDashboard from "./pages/UserDashboard";
-import CreatePassword from "./pages/CreatePassword";
-import Verification from "./pages/Verification";
-import CreateListing from "./pages/CreateListing";
-import SingleListing from "./pages/SingleListing";
+import Loader from "./components/Loader";
+const Home = lazy(() => import('./pages/Home'));
+const Register = lazy(() => import('./pages/Register'));
+const Login = lazy(() => import('./pages/Login'));
+const ForgotPassword = lazy(() => import('./pages/ForgotPassword'));
+const UserDashboard = lazy(() => import('./pages/UserDashboard'));
+const CreatePassword = lazy(() => import('./pages/CreatePassword'));
+const Verification = lazy(() => import('./pages/Verification'));
+const CreateListing = lazy(() => import('./pages/CreateListing'));
+const SingleListing = lazy(() => import('./pages/SingleListing'));
 
 function App() {
   return (
     <>
       <Router>
-        <Routes>
-          <Route exact path="/" element={<Home />}/>
-          <Route path="/login" element={<Login />}/>
-          <Route path="/register" element={<Register />}/>
-          <Route path="/forgot-password" element={<ForgotPassword />}/>
-          <Route path="/dashboard" element={<UserDashboard />}/>
-          <Route path="/create-password" element={<CreatePassword />}/>
-          <Route path="/otp-verification" element={<Verification />}/>
-          <Route path="/create-listing" element={<CreateListing />}/>
-          <Route path="/listing/:id" element={<SingleListing />}/>
-        </Routes>
+        <Suspense fallback={<Loader />}>
+          <Routes>
+            <Route exact path="/" element={<Home />}/>
+            <Route path="/login" element={<Login />}/>
+            <Route path="/register" element={<Register />}/>
+            <Route path="/forgot-password" element={<ForgotPassword />}/>
+            <Route path="/dashboard" element={<UserDashboard />}/>
+            <Route path="/create-password" element={<CreatePassword />}/>
+            <Route path="/otp-verification" element={<Verification />}/>
+            <Route path="/create-listing" element={<CreateListing />}/>
+            <Route path="/listing/:id" element={<SingleListing />}/>
+          </Routes>
+        </Suspense>
       </Router>
     </>
   );

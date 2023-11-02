@@ -268,7 +268,7 @@ const SingleListing = () => {
             <div className="bg-white mt-4 rounded-md shadow-sm p-6 border w-full border-[#ebebeb]">
               <h3 className="text-lg font-semibold text-[#484848]">Amenities</h3>
               <div className="pt-3">
-                <div className="flex flex-col md:flex-row justify-between md:gap-0 gap-1 items-start md:items-center">
+                <div className="flex flex-col md:flex-row justify-between md:gap-0 gap-2 items-start md:items-center">
                   {splitArray.map((item, index) => (
                     <div key={index} className="flex items-center gap-1">
                       <BiCheck size={20} className="text-[#ff5a5f]"/>
